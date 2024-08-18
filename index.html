@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Image Mover</title>
+    <!-- apply basic styling and a creative background color -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        #memeimage {
+            position: absolute;
+            width: 200px; /* Reduced size for a better look */
+            height: auto;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #startButton {
+            background-color: #28a745;
+            color: white;
+        }
+        #stopButton {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page heading with the user name -->
+    <h1>Interactive Meme Mover</h1>
+
+    <!-- Start and stop buttons -->
+    <button id="startButton" onclick="startMoving()">Start</button>
+    <button id="stopButton" onclick="stopMoving()" disabled>Stop</button>
+
+    <!-- The meme image -->
+    <img id="memeimage" src="https://www.splashlearn.com/blog/wp-content/uploads/2022/04/Summer-is-over-school-memes-1024x1024.jpg" />
+
+    <!-- JavaScript to handle the movement of the image -->
+    <script>
+        // Initialize variables for the image and movement interval
+        let memeImage = document.getElementById('memeimage');
+        let intervalId;
+
+        // Function to start moving the meme image
+        function startMoving() {
+            // Disable the start button and enable the stop button
+            document.getElementById('startButton').disabled = true;
+            document.getElementById('stopButton').disabled = false;
+
+            // Set the interval to move the image every 500ms
+            intervalId = setInterval(moveImage, 500);
+        }
+
+        // Function to stop moving the meme image
+        function stopMoving() {
+            // Disable the stop button and enable the start button
+            document.getElementById('stopButton').disabled = true;
+            document.getElementById('startButton').disabled = false;
+
+            // Clear the interval to stop the image movement
+            clearInterval(intervalId);
+        }
+
+        // Function to move the image to random positions
+        function moveImage() {
+            // Get the width and height of the window
+            let windowWidth = window.innerWidth;
+            let windowHeight = window.innerHeight;
+
+            // Generate random positions within the window boundaries
+            let randomX = Math.floor(Math.random() * (windowWidth - memeImage.width));
+            let randomY = Math.floor(Math.random() * (windowHeight - memeImage.height));
+
+            // Apply the new positions to the image
+            memeImage.style.left = randomX + 'px';
+            memeImage.style.top = randomY + 'px';
+        }
+    </script>
+</body>
+</html>
